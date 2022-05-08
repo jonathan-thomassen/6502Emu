@@ -1,12 +1,12 @@
-﻿using _6502Emu;
-using static _6502Emu.Registers;
+﻿using static _6502Emu.Registers;
 using static _6502Emu.Memory;
 using static _6502Emu.CPU;
 
-LoadROMFile(@"C:\Users\jonat\Desktop\o6502-2022-05-07-145410.bin");
+LoadROMFile(@"C:\Users\jonat\Desktop\o6502-2022-05-08-194137.bin");
+P = 0x36;
 PrintProcessorStatus();
 while (true) {
-    ExecuteInstruction(ReadByte(PC++));
+    ExecuteInstruction(ReadByte((ushort)(PC++ + ROMLocation)));
     PrintProcessorStatus();
 }
 

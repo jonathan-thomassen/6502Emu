@@ -1461,10 +1461,24 @@ namespace _6502Emu {
             void Branch(bool takeBranch) {
                 SpendCycles(2);
                 byte offset = ReadByte((ushort)(PC++ + ROMLocation));
+                sbyte signedOffset;
+
+                if (offset < 128) {
+                    signedOffset = (sbyte)(offset);
+                } else {
+                    signedOffset = (sbyte)(offset - 256);
+                }
+
                 if (takeBranch) {
                     SpendCycles(1);
-                    if ((byte)PC > (byte)(PC += offset)) {
-                        SpendCycles(1);
+                    if (signedOffset < 0) {
+                        if ((byte)PC < (byte)(PC = (ushort)(PC + signedOffset))) {
+                            SpendCycles(1);
+                        }
+                    } else {
+                        if ((byte)PC > (byte)(PC = (ushort)(PC + signedOffset))) {
+                            SpendCycles(1);
+                        }
                     }
                 }
             }
@@ -2092,7 +2106,7 @@ namespace _6502Emu {
         internal static void SpendCycles(int cycles) {
             for (int i = 0; i < cycles; i++) {
                 Console.WriteLine("Press any key to spend a cycle:");
-                Console.ReadKey();
+                //Console.ReadKey();
                 CycleCount++;
                 Console.WriteLine("");
             }

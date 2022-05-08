@@ -10,17 +10,22 @@ namespace _6502Emu {
         internal const ushort StackLocation = 0x0100;
         internal const ushort IOLocation = 0x4000;
         internal const ushort ROMLocation = 0x8000;
-        internal static byte[] RAM = new byte[2048];
-        internal static byte[] ROM = new byte[2048];
+        internal static byte[] RAM = new byte[4096];
+        internal static byte[] ROM = new byte[4096];
 
         internal static void LoadROMFile(string path) {
             FileStream fileStream = File.OpenRead(path);
-            byte[] romFile = new byte[2048];
+            byte[] empty = new byte[0x800];
+            byte[] romFile = new byte[4096];
 
             fileStream.Read(romFile);
             fileStream.Close();
 
-            ROM = romFile;
+            byte[] finalRom = new byte[empty.Length + romFile.Length];
+            empty.CopyTo(finalRom, 0);
+            romFile.CopyTo(finalRom, empty.Length);
+
+            ROM = finalRom;
         }
 
         internal static byte ReadByte(ushort address) {

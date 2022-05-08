@@ -11,7 +11,7 @@ namespace _6502Emu {
         internal static byte Y;
         internal static byte P;
         internal static byte S = 0xFF;
-        internal static ushort PC = 0x8000;
+        internal static ushort PC = 0x0800;
 
         internal static bool C {
             get => (P & 0b0000_0001) == 0b0000_0001;
