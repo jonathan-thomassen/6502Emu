@@ -1473,463 +1473,614 @@ namespace _6502Emu {
             #region Opcode switch
             switch (opcode) {
                 case 0x00: // BRK
+                    Console.WriteLine("Executing instruction BRK (Force Break)...");
                     BRK();
                     break;
                 case 0x01: // ORA ind,X
+                    Console.WriteLine("Executing instruction ORA (OR Memory with Accumulator), Mode: Indirect, Index: X...");
                     ORA(InstructionMode.Indirect, IndexRegister.X);
                     break;
                 case 0x05: // ORA zpg
+                    Console.WriteLine("Executing instruction ORA (OR Memory with Accumulator), Mode: ZeroPage...");
                     ORA(InstructionMode.ZeroPage);
                     break;
                 case 0x06: // ASL zpg
+                    Console.WriteLine("Executing instruction ASL (Arithmetic Shift Left), Mode: ZeroPage...");
                     ASL(InstructionMode.ZeroPage);
                     break;
                 case 0x08: // PHP
+                    Console.WriteLine("Executing instruction PHP (Push Processor Status on Stack with Accumulator)...");
                     PHP();
                     break;
                 case 0x09: // ORA #
+                    Console.WriteLine("Executing instruction ORA (OR Memory with Accumulator), Mode: Immediate...");
                     ORA(InstructionMode.Immediate);
                     break;
                 case 0x0A: // ASL A
+                    Console.WriteLine("Executing instruction ASL (Arithmetic Shift Left), Mode: Accumulator...");
                     ASL(InstructionMode.Accumulator);
                     break;
                 case 0x0D: // ORA abs
+                    Console.WriteLine("Executing instruction ORA (OR Memory with Accumulator), Mode: Absolute...");
                     ORA(InstructionMode.Absolute);
                     break;
                 case 0x0E: // ASL abs
+                    Console.WriteLine("Executing instruction ASL (Arithmetic Shift Left), Mode: Absolute...");
                     ASL(InstructionMode.Absolute);
                     break;
                 case 0x10: // BPL rel
+                    Console.WriteLine("Executing instruction BPL (Branch on Result Plus)...");
                     Branch(!N);
                     break;
                 case 0x11: // ORA ind,Y
+                    Console.WriteLine("Executing instruction ORA (OR Memory with Accumulator), Mode: Indirect, Index: Y...");
                     ORA(InstructionMode.Indirect, IndexRegister.Y);
                     break;
                 case 0x15: // ORA zpg,X
+                    Console.WriteLine("Executing instruction ORA (OR Memory with Accumulator), Mode: ZeroPage, Index: X...");
                     ORA(InstructionMode.ZeroPage, IndexRegister.X);
                     break;
                 case 0x16: // ASL zpg,X
+                    Console.WriteLine("Executing instruction ASL (Arithmetic Shift Left), Mode: ZeroPage, Index: X...");
                     ASL(InstructionMode.ZeroPage, IndexRegister.X);
                     break;
                 case 0x18: // CLC
+                    Console.WriteLine("Executing instruction CLC (Clear Carry Flag)...");
                     SpendCycles(2);
                     C = false;
                     break;
                 case 0x19: // ORA abs,Y
+                    Console.WriteLine("Executing instruction ORA (OR Memory with Accumulator), Mode: Absolute, Index: Y...");
                     ORA(InstructionMode.Absolute, IndexRegister.Y);
                     break;
                 case 0x1D: // ORA abs,X
+                    Console.WriteLine("Executing instruction ORA (OR Memory with Accumulator), Mode: Absolute, Index: X...");
                     ORA(InstructionMode.Absolute, IndexRegister.X);
                     break;
                 case 0x1E: // ASL abs,X
+                    Console.WriteLine("Executing instruction ASL (Arithmetic Shift Left), Mode: Absolute, Index: X...");
                     ASL(InstructionMode.Absolute, IndexRegister.X);
                     break;
                 case 0x20: // JSR abs
+                    Console.WriteLine("Executing instruction JST (Jump to Subroutine)...");
                     JSR();
                     break;
                 case 0x21: // AND ind,X
+                    Console.WriteLine("Executing instruction AND (AND Memory with Accumulator), Mode: Indirect, Index: X...");
                     AND(InstructionMode.Indirect, IndexRegister.X);
                     break;
                 case 0x24: // BIT zpg
+                    Console.WriteLine("Executing instruction BIT (Test Bits in Memory with Accumulator), Mode: ZeroPage...");
                     BIT(InstructionMode.ZeroPage);
                     break;
                 case 0x25: // AND zpg
+                    Console.WriteLine("Executing instruction AND (AND Memory with Accumulator), Mode: ZeroPage...");
                     AND(InstructionMode.ZeroPage);
                     break;
                 case 0x26: // ROL zpg
+                    Console.WriteLine("Executing instruction ROL (Rotate Left), Mode: ZeroPage...");
                     ROL(InstructionMode.ZeroPage);
                     break;
                 case 0x28: // PLP
+                    Console.WriteLine("Executing instruction PLP (Pull Processor Status from Stack)...");
                     PLP();
                     break;
                 case 0x29: // AND #
+                    Console.WriteLine("Executing instruction AND (AND Memory with Accumulator), Mode: Immediate...");
                     AND(InstructionMode.Immediate);
                     break;
                 case 0x2A: // ROL A
+                    Console.WriteLine("Executing instruction ROL (Rotate Left), Mode: Accumulator...");
                     ROL(InstructionMode.Accumulator);
                     break;
                 case 0x2C: // BIT abs
+                    Console.WriteLine("Executing instruction BIT (Test Bits in Memory with Accumulator), Mode: Absolute...");
                     BIT(InstructionMode.Absolute);
                     break;
                 case 0x2D: // AND abs
+                    Console.WriteLine("Executing instruction AND (AND Memory with Accumulator), Mode: Absolute...");
                     AND(InstructionMode.Absolute);
                     break;
                 case 0x2E: // ROL abs
+                    Console.WriteLine("Executing instruction ROL (Rotate Left), Mode: Absolute...");
                     ROL(InstructionMode.Absolute);
                     break;
                 case 0x30: // BMI rel
+                    Console.WriteLine("Executing instruction BMI (Branch on Result Minus)...");
                     Branch(N);
                     break;
                 case 0x31: // AND ind,Y
+                    Console.WriteLine("Executing instruction AND (AND Memory with Accumulator), Mode: Indirect, Index: Y...");
                     AND(InstructionMode.Indirect, IndexRegister.Y);
                     break;
                 case 0x35: // AND zpg,X
+                    Console.WriteLine("Executing instruction AND (AND Memory with Accumulator), Mode: ZeroPage, Index: X...");
                     AND(InstructionMode.ZeroPage, IndexRegister.X);
                     break;
                 case 0x36: // ROL zpg,X
+                    Console.WriteLine("Executing instruction ROL (Rotate Left), Mode: ZeroPage, Index: X...");
                     ROL(InstructionMode.ZeroPage, IndexRegister.X);
                     break;
                 case 0x38: // SEC
+                    Console.WriteLine("Executing instruction SEC (Set Carry Flag)...");
                     SpendCycles(2);
                     C = true;
                     break;
                 case 0x39: // AND abs,Y
+                    Console.WriteLine("Executing instruction AND (AND Memory with Accumulator), Mode: Absolute, Index: Y...");
                     AND(InstructionMode.Absolute, IndexRegister.Y);
                     break;
                 case 0x3D: // AND abs,X
+                    Console.WriteLine("Executing instruction AND (AND Memory with Accumulator), Mode: Absolute, Index: X...");
                     AND(InstructionMode.Absolute, IndexRegister.X);
                     break;
                 case 0x3E: // ROL abs,X
+                    Console.WriteLine("Executing instruction ROL (Rotate Left with Accumulator), Mode: Absolute, Index: X...");
                     ROL(InstructionMode.Absolute, IndexRegister.X);
                     break;
                 case 0x40: // RTI
+                    Console.WriteLine("Executing instruction RTI (Return from Interrupt)...");
                     RTI();
                     break;
                 case 0x41: // EOR ind,X
+                    Console.WriteLine("Executing instruction EOR (XOR Memory with Accumulator), Mode: Indirect, Index: X...");
                     EOR(InstructionMode.Indirect, IndexRegister.X);
                     break;
                 case 0x45: // EOR zpg
+                    Console.WriteLine("Executing instruction EOR (XOR Memory with Accumulator), Mode: ZeroPage...");
                     EOR(InstructionMode.ZeroPage);
                     break;
                 case 0x46: // LSR zpg
+                    Console.WriteLine("Executing instruction LSR (Logical Shift Right), Mode: ZeroPage...");
                     LSR(InstructionMode.ZeroPage);
                     break;
                 case 0x48: // PHA
+                    Console.WriteLine("Executing instruction PHA (Push Accumulator to Stack)...");
                     PHA();
                     break;
                 case 0x49: // EOR #
+                    Console.WriteLine("Executing instruction EOR (XOR Memory with Accumulator), Mode: Immediate...");
                     EOR(InstructionMode.Immediate);
                     break;
                 case 0x4A: // LSR A
+                    Console.WriteLine("Executing instruction LSR (Logical Shift Right), Mode: Accumulator...");
                     LSR(InstructionMode.Accumulator);
                     break;
                 case 0x4C: // JMP abs
+                    Console.WriteLine("Executing instruction JMP (Jump to New Location), Mode: Absolute...");
                     JMP(InstructionMode.Absolute);
                     break;
                 case 0x4D: // EOR abs
+                    Console.WriteLine("Executing instruction EOR (XOR Memory with Accumulator), Mode: Absolute...");
                     EOR(InstructionMode.Absolute);
                     break;
                 case 0x4E: // LSR abs,X
+                    Console.WriteLine("Executing instruction LSR (Logical Shift Right), Mode: Absolute, Index: X...");
                     LSR(InstructionMode.Absolute, IndexRegister.X);
                     break;
                 case 0x50: // BVC rel
+                    Console.WriteLine("Executing instruction BVC (Branch on Overflow Clear)...");
                     Branch(!V);
                     break;
                 case 0x51: // EOR ind,X
+                    Console.WriteLine("Executing instruction EOR (XOR Memory with Accumulator), Mode: Indirect, Index: X...");
                     EOR(InstructionMode.Indirect, IndexRegister.X);
                     break;
                 case 0x55: // EOR zpg,X
+                    Console.WriteLine("Executing instruction EOR (XOR Memory with Accumulator), Mode: ZeroPage, Index: X...");
                     EOR(InstructionMode.ZeroPage, IndexRegister.X);
                     break;
                 case 0x56: // LSR zpg,X
+                    Console.WriteLine("Executing instruction LSR (Logical Shift Right), Mode: ZeroPage, Index: X...");
                     LSR(InstructionMode.ZeroPage, IndexRegister.X);
                     break;
                 case 0x58: // CLI
+                    Console.WriteLine("Executing instruction CLI (Clear Interrupt Disable)...");
                     SpendCycles(2);
                     I = false;
                     break;
                 case 0x59: // EOR abs,Y
+                    Console.WriteLine("Executing instruction EOR (XOR Memory with Accumulator), Mode: Absolute, Index: Y...");
                     EOR(InstructionMode.Absolute, IndexRegister.Y);
                     break;
                 case 0x5D: // EOR abs,X
+                    Console.WriteLine("Executing instruction EOR (XOR Memory with Accumulator), Mode: Absolute, Index: X...");
                     EOR(InstructionMode.Absolute, IndexRegister.X);
                     break;
                 case 0x5E: // LSR abs,X
+                    Console.WriteLine("Executing instruction LSR (Logical Shift Right), Mode: Absolute, Index: X...");
                     LSR(InstructionMode.Absolute, IndexRegister.X);
                     break;
                 case 0x60: // RTS
+                    Console.WriteLine("Executing instruction RTS (Return from Subroutine)...");
                     RTS();
                     break;
                 case 0x61: // ADC ind,Y
+                    Console.WriteLine("Executing instruction ADC (Add with Carry to Accumulator), Mode: Indirect, Index: Y...");
                     ADC(InstructionMode.Indirect, IndexRegister.Y);
                     break;
                 case 0x65: // ADC zpg
+                    Console.WriteLine("Executing instruction ADC (Add with Carry to Accumulator), Mode: ZeroPage...");
                     ADC(InstructionMode.ZeroPage);
                     break;
                 case 0x66: // ROR zpg
+                    Console.WriteLine("Executing instruction ROR (Rotate Right), Mode: ZeroPage...");
                     ROR(InstructionMode.ZeroPage);
                     break;
                 case 0x68: // PLA
+                    Console.WriteLine("Executing instruction PLA (Pull Accumulator from Stack)...");
                     PLA();
                     break;
                 case 0x69: // ADC #
+                    Console.WriteLine("Executing instruction ADC (Add with Carry to Accumulator), Mode: Immediate...");
                     ADC(InstructionMode.Immediate);
                     break;
                 case 0x6A: // ROR A
+                    Console.WriteLine("Executing instruction ROR (Rotate Right), Mode: Accumulator...");
                     ROR(InstructionMode.Accumulator);
                     break;
                 case 0x6C: // JMP ind
+                    Console.WriteLine("Executing instruction JMP (Jump to New Location), Mode: Indirect...");
                     JMP(InstructionMode.Indirect);
                     break;
                 case 0x6D: // ADC abs
+                    Console.WriteLine("Executing instruction ADC (Add with Carry to Accumulator), Mode: Absolute...");
                     ADC(InstructionMode.Absolute);
                     break;
                 case 0x6E: // ROR abs
+                    Console.WriteLine("Executing instruction ROR (Rotate Right), Mode: Absolute...");
                     ROR(InstructionMode.Absolute);
                     break;
                 case 0x70: // BVS rel
+                    Console.WriteLine("Executing instruction BVS (Branch on Overflow Set)...");
                     Branch(V);
                     break;
                 case 0x71: // ADC ind,Y
+                    Console.WriteLine("Executing instruction ADC (Add with Carry to Accumulator), Mode: Indirect, Index: Y...");
                     ADC(InstructionMode.Indirect, IndexRegister.Y);
                     break;
                 case 0x75: // ADC zpg,X
+                    Console.WriteLine("Executing instruction ADC (Add with Carry to Accumulator), Mode: ZeroPage, Index: X...");
                     ADC(InstructionMode.ZeroPage, IndexRegister.X);
                     break;
                 case 0x76: // ROR zpg,X
+                    Console.WriteLine("Executing instruction ROR (Rotate Right), Mode: ZeroPage, Index: X...");
                     ROR(InstructionMode.ZeroPage, IndexRegister.X);
                     break;
                 case 0x78: // SEI
+                    Console.WriteLine("Executing instruction SEI (Set Interrupt Disable)...");
                     SpendCycles(2);
                     I = true;
                     break;
                 case 0x79: // ADC abs,Y
+                    Console.WriteLine("Executing instruction ADC (Add with Carry to Accumulator), Mode: Absolute, Index: Y...");
                     ADC(InstructionMode.Absolute, IndexRegister.Y);
                     break;
                 case 0x7D: // ADC abs,X
+                    Console.WriteLine("Executing instruction ADC (Add with Carry to Accumulator), Mode: Absolute, Index: X...");
                     ADC(InstructionMode.Absolute, IndexRegister.X);
                     break;
                 case 0x7E: // ROR abs,X
+                    Console.WriteLine("Executing instruction ROR (Rotate Right), Mode: Absolute, Index: X...");
                     ROR(InstructionMode.Absolute, IndexRegister.X);
                     break;
                 case 0x81: // STA ind,X
+                    Console.WriteLine("Executing instruction STA (Store Accumulator in Memory), Mode: Indirect, Index: X...");
                     STA(InstructionMode.Indirect, IndexRegister.X);
                     break;
                 case 0x84: // STY zpg
+                    Console.WriteLine("Executing instruction STY (Store Index Register Y in Memory), Mode: ZeroPage...");
                     STY(InstructionMode.ZeroPage);
                     break;
                 case 0x85: // STA zpg
+                    Console.WriteLine("Executing instruction STA (Store Accumulator in Memory), Mode: ZeroPage...");
                     STA(InstructionMode.ZeroPage);
                     break;
                 case 0x86: // STX zpg
+                    Console.WriteLine("Executing instruction STX (Store Index Register X in Memory), Mode: ZeroPage...");
                     STX(InstructionMode.ZeroPage);
                     break;
                 case 0x88: // DEY
+                    Console.WriteLine("Executing instruction DEY (Decrement Index Register Y)...");
                     DEY();
                     break;
                 case 0x8A: // TXA
+                    Console.WriteLine("Executing instruction TXA (Transfer Index Register X to Accumulator)...");
                     TXA();
                     break;
                 case 0x8C: // STY abs
+                    Console.WriteLine("Executing instruction STY (Store Index Register Y in Memory), Mode: Absolute...");
                     STY(InstructionMode.Absolute);
                     break;
                 case 0x8D: // STA abs
+                    Console.WriteLine("Executing instruction STA (Store Accumulator in Memory), Mode: Absolute...");
                     STA(InstructionMode.Absolute);
                     break;
                 case 0x8E: // STX abs
+                    Console.WriteLine("Executing instruction STX (Store Index Register X in Memory), Mode: Absolute...");
                     STX(InstructionMode.Absolute);
                     break;
                 case 0x90: // BCC rel
+                    Console.WriteLine("Executing instruction BCC (Branch on Carry Clear)...");
                     Branch(!C);
                     break;
                 case 0x91: // STA ind,Y
+                    Console.WriteLine("Executing instruction STA (Store Accumulator in Memory), Mode: Indirect, Index: Y...");
                     STA(InstructionMode.Indirect, IndexRegister.Y);
                     break;
                 case 0x94: // STY zpg,X
+                    Console.WriteLine("Executing instruction STY (Store Index Register Y in Memory), Mode: ZeroPage, Index: X...");
                     STY(InstructionMode.ZeroPage, IndexRegister.X);
                     break;
                 case 0x95: // STA zpg,X
+                    Console.WriteLine("Executing instruction STA (Store Accumulator in Memory), Mode: ZeroPage, Index: X...");
                     STA(InstructionMode.ZeroPage, IndexRegister.X);
                     break;
                 case 0x96: // STX zpg,Y
+                    Console.WriteLine("Executing instruction STX (Store Index Register X in Memory), Mode: ZeroPage, Index: Y...");
                     STX(InstructionMode.ZeroPage, IndexRegister.Y);
                     break;
                 case 0x98: // TYA
+                    Console.WriteLine("Executing instruction TYA (Transfer Index Register Y to Accumulator)...");
                     TYA();
                     break;
                 case 0x99: // STA abs,Y
+                    Console.WriteLine("Executing instruction STA (Store Accumulator in Memory), Mode: Absolute, Index: Y...");
                     STA(InstructionMode.Absolute, IndexRegister.Y);
                     break;
                 case 0x9A: // TXS
+                    Console.WriteLine("Executing instruction TXS (Transfer Index Register X to Stack Pointer)...");
                     TXS();
                     break;
                 case 0x9D: // STA abs,X
+                    Console.WriteLine("Executing instruction STA (Store Accumulator in Memory), Mode: Absolute, Index: X...");
                     STA(InstructionMode.Absolute, IndexRegister.X);
                     break;
                 case 0xA0: // LDY #
+                    Console.WriteLine("Executing instruction LDY (Load Index Register Y with Memory), Mode: Immediate...");
                     LDY(InstructionMode.Immediate);
                     break;
                 case 0xA1: // LDA ind,X
+                    Console.WriteLine("Executing instruction LDA (Load Accumulator with Memory), Mode: Indirect, Index: X...");
                     LDA(InstructionMode.Indirect, IndexRegister.X);
                     break;
                 case 0xA2: // LDX #
+                    Console.WriteLine("Executing instruction LDX (Load Index Register X with Memory), Mode: Immediate...");
                     LDX(InstructionMode.Immediate);
                     break;
                 case 0xA4: // LDY zpg
+                    Console.WriteLine("Executing instruction LDY (Load Index Register Y with Memory), Mode: ZeroPage...");
                     LDY(InstructionMode.ZeroPage);
                     break;
                 case 0xA5: // LDA zpg
+                    Console.WriteLine("Executing instruction LDA (Load Accumulator with Memory), Mode: ZeroPage...");
                     LDA(InstructionMode.ZeroPage);
                     break;
                 case 0xA6: // LDX zpg
+                    Console.WriteLine("Executing instruction LDX (Load Index Register X with Memory), Mode: ZeroPage...");
                     LDX(InstructionMode.ZeroPage);
                     break;
                 case 0xA8: // TAY
+                    Console.WriteLine("Executing instruction TAY (Transfer Accumulator to Index Register Y)...");
                     TAY();
                     break;
                 case 0xA9: // LDA #
+                    Console.WriteLine("Executing instruction LDA (Load Accumulator with Memory), Mode: Immediate...");
                     LDA(InstructionMode.Immediate);
                     break;
                 case 0xAA: // TAX
+                    Console.WriteLine("Executing instruction TAX (Transfer Accumulator to Index Register X)...");
                     TAX();
                     break;
                 case 0xAC: // LDY abs
+                    Console.WriteLine("Executing instruction LDY (Load Index Register Y with Memory), Mode: Absolute...");
                     LDY(InstructionMode.Absolute);
                     break;
                 case 0xAD: // LDA abs
+                    Console.WriteLine("Executing instruction LDA (Load Accumulator with Memory), Mode: Absolute...");
                     LDA(InstructionMode.Absolute);
                     break;
                 case 0xAE: // LDX abs
+                    Console.WriteLine("Executing instruction LDX (Load Index Register X with Memory), Mode: Absolute...");
                     LDX(InstructionMode.Absolute);
                     break;
                 case 0xB0: // BCS rel
+                    Console.WriteLine("Executing instruction BCS (Branch on Carry Set)...");
                     Branch(C);
                     break;
                 case 0xB1: // LDA ind,X
+                    Console.WriteLine("Executing instruction LDA (Load Accumulator with Memory), Mode: Indirect, Index: X...");
                     LDA(InstructionMode.Indirect, IndexRegister.X);
                     break;
                 case 0xB4: // LDY zpg,X
+                    Console.WriteLine("Executing instruction LDY (Load Index Register Y with Memory), Mode: ZeroPage, Index: X...");
                     LDY(InstructionMode.ZeroPage, IndexRegister.X);
                     break;
                 case 0xB5: // LDA zpg,X
+                    Console.WriteLine("Executing instruction LDA (Load Accumulatore with Memory), Mode: ZeroPage, Index: X...");
                     LDA(InstructionMode.ZeroPage, IndexRegister.X);
                     break;
                 case 0xB6: // LDX zpg,Y
+                    Console.WriteLine("Executing instruction LDX (Load Index Register X with Memory), Mode: ZeroPage, Index: Y...");
                     LDX(InstructionMode.ZeroPage, IndexRegister.Y);
                     break;
                 case 0xB8: // CLV
+                    Console.WriteLine("Executing instruction CLV (Clear Overflow Flag)...");
                     SpendCycles(2);
                     V = false;
                     break;
                 case 0xB9: // LDA abs,Y
+                    Console.WriteLine("Executing instruction LDA (Load Accumulator with Memory), Mode: Absolute, Index: Y...");
                     LDA(InstructionMode.Absolute, IndexRegister.Y);
                     break;
                 case 0xBA: // TSX
+                    Console.WriteLine("Executing instruction TSX (Transfer Stack Pointer to Index Register X)...");
                     TSX();
                     break;
                 case 0xBC: // LDY abs,X
+                    Console.WriteLine("Executing instruction LDY (Load Index Register Y with Memory), Mode: Absolute, Index: X...");
                     LDY(InstructionMode.Absolute, IndexRegister.X);
                     break;
                 case 0xBD: // LDA abs,X
+                    Console.WriteLine("Executing instruction LDA (Load Accumulator with Memory), Mode: Absolute, Index: X...");
                     LDA(InstructionMode.Absolute, IndexRegister.X);
                     break;
                 case 0xBE: // LDX abs,Y
+                    Console.WriteLine("Executing instruction LDX (Load Index Register X with Memory), Mode: Absolute, Index: Y...");
                     LDX(InstructionMode.Absolute, IndexRegister.Y);
                     break;
                 case 0xC0: // CPY #
+                    Console.WriteLine("Executing instruction CPY (Compare Index Register Y with Memory), Mode: Immediate...");
                     CPY(InstructionMode.Immediate);
                     break;
                 case 0xC1: // CMP ind,X
+                    Console.WriteLine("Executing instruction CMP (Compare Accumulator with Memory), Mode: Indirect, Index: X...");
                     CMP(InstructionMode.Indirect, IndexRegister.X);
                     break;
                 case 0xC4: // CPY zpg
+                    Console.WriteLine("Executing instruction CPY (Compare Index Register Y with Memory), Mode: ZeroPage...");
                     CPY(InstructionMode.ZeroPage);
                     break;
                 case 0xC5: // CMP zpg
+                    Console.WriteLine("Executing instruction CMP (Compare Accumulator with Memory), Mode: ZeroPage...");
                     CMP(InstructionMode.ZeroPage);
                     break;
                 case 0xC6: // DEC zpg
+                    Console.WriteLine("Executing instruction DEC (Decrement Memory by One), Mode: ZeroPage...");
                     DEC(InstructionMode.ZeroPage);
                     break;
                 case 0xC8: // INY
+                    Console.WriteLine("Executing instruction INY (Increment Index Register Y by One)...");
                     INY();
                     break;
                 case 0xC9: // CMP #
+                    Console.WriteLine("Executing instruction CMP (Compare Accumulator with Memory), Mode: Immediate...");
                     CMP(InstructionMode.Immediate);
                     break;
                 case 0xCA: // DEX
+                    Console.WriteLine("Executing instruction DEX (Decrement Index Register X by One)...");
                     DEX();
                     break;
                 case 0xCC: // CPY abs
+                    Console.WriteLine("Executing instruction CPY (Compare Index Register Y with Memory), Mode: Absolute...");
                     CPY(InstructionMode.Absolute);
                     break;
                 case 0xCD: // CMP abs
+                    Console.WriteLine("Executing instruction CMP (Compare Accumulator with Memory), Mode: Absolute...");
                     CMP(InstructionMode.Absolute);
                     break;
                 case 0xCE: // DEC abs
+                    Console.WriteLine("Executing instruction DEC (Decrement Memory by One), Mode: Absolute...");
                     DEC(InstructionMode.Absolute);
                     break;
                 case 0xD0: // BNE rel
+                    Console.WriteLine("Executing instruction BNE (Branch on Not Equal (Zero Clear))...");
                     Branch(!Z);
                     break;
                 case 0xD1: // CMP ind,Y
+                    Console.WriteLine("Executing instruction CMP (Compare Accumulator with Memory), Mode: Indirect, Index: Y...");
                     CMP(InstructionMode.Indirect, IndexRegister.Y);
                     break;
                 case 0xD5: // CMP zpg,X
+                    Console.WriteLine("Executing instruction CMP (Compare Accumulator with Memory), Mode: ZeroPage, Index: X...");
                     CMP(InstructionMode.ZeroPage, IndexRegister.X);
                     break;
                 case 0xD6: // DEC zpg,X
+                    Console.WriteLine("Executing instruction DEC (Decrement Memory by One), Mode: ZeroPage, Index: X...");
                     DEC(InstructionMode.ZeroPage, IndexRegister.X);
                     break;
                 case 0xD8: // CLD
+                    Console.WriteLine("Executing instruction CLD (Clear Decimal Mode)...");
                     SpendCycles(2);
                     D = false;
                     break;
                 case 0xD9: // CMP abs,Y
+                    Console.WriteLine("Executing instruction CMP (Compare Accumulator with Memory), Mode: Absolute, Index: Y...");
                     CMP(InstructionMode.Absolute, IndexRegister.Y);
                     break;
                 case 0xDD: // CMP abs,X
+                    Console.WriteLine("Executing instruction CMP (Compare Accumulator with Memory), Mode: Absolute, Index: X...");
                     CMP(InstructionMode.Absolute, IndexRegister.X);
                     break;
                 case 0xDE: // DEC abs,x
+                    Console.WriteLine("Executing instruction DEC (Decrement Memory by One), Mode: Absolute, Index: X...");
                     DEC(InstructionMode.Absolute, IndexRegister.X);
                     break;
                 case 0xE0: // CPX #
+                    Console.WriteLine("Executing instruction CPX (Compare Index Register X with Memory), Mode: Immediate...");
                     CPX(InstructionMode.Immediate);
                     break;
                 case 0xE1: // SBC ind,X
+                    Console.WriteLine("Executing instruction SBC (Subtract with Carry), Mode: Indirect, Index: X...");
                     SBC(InstructionMode.Indirect, IndexRegister.X);
                     break;
                 case 0xE4: // CPX zpg
+                    Console.WriteLine("Executing instruction CPX (Compare Index Register X with Memory), Mode: ZeroPage...");
                     CPX(InstructionMode.ZeroPage);
                     break;
                 case 0xE5: // SBC zpg
+                    Console.WriteLine("Executing instruction SBC (Subtract with Carry), Mode: ZeroPage...");
                     SBC(InstructionMode.ZeroPage);
                     break;
                 case 0xE6: // INC zpg
+                    Console.WriteLine("Executing instruction INC (Increment Memory by One), Mode: ZeroPage...");
                     INC(InstructionMode.ZeroPage);
                     break;
                 case 0xE8: // INX
+                    Console.WriteLine("Executing instruction INX (Increment Index Register X by One)...");
                     INX();
                     break;
                 case 0xE9: // SBC #
+                    Console.WriteLine("Executing instruction SBC (Subtract with Carry), Mode: Immediate...");
                     SBC(InstructionMode.Immediate);
                     break;
                 case 0xEA: // NOP
+                    Console.WriteLine("Executing instruction NOP (No Operation)...");
                     NOP();
                     break;
                 case 0xEC: // CPX abs
+                    Console.WriteLine("Executing instruction CPX (Compare Index Register X with Memory), Mode: Absolute...");
                     CPX(InstructionMode.Absolute);
                     break;
                 case 0xED: // SBC abs
+                    Console.WriteLine("Executing instruction SBC (Subtract with Carry), Mode: Absolute...");
                     SBC(InstructionMode.Absolute);
                     break;
                 case 0xEE: // INC abs
+                    Console.WriteLine("Executing instruction INC (Increment Memory by One with Carry), Mode: Absolute...");
                     INC(InstructionMode.Absolute);
                     break;
                 case 0xF0: // BEQ rel
+                    Console.WriteLine("Executing instruction BEQ (Branch on Equal (Zero Set))...");
                     Branch(Z);
                     break;
                 case 0xF1: // SBC ind,Y
+                    Console.WriteLine("Executing instruction SBC (Subtract with Carry), Mode: Indirect, Index: Y...");
                     SBC(InstructionMode.Indirect, IndexRegister.Y);
                     break;
                 case 0xF5: // SBC zpg,X
+                    Console.WriteLine("Executing instruction SBC (Subtract with Carry), Mode: ZeroPage, Index: X...");
                     SBC(InstructionMode.ZeroPage, IndexRegister.X);
                     break;
                 case 0xF6: // INC zpg,X
+                    Console.WriteLine("Executing instruction INC (Increment Memory by One), Mode: ZeroPage, Index: X...");
                     INC(InstructionMode.ZeroPage, IndexRegister.X);
                     break;
                 case 0xF8: // SED
+                    Console.WriteLine("Executing instruction SED (Set Decimal Mode)...");
                     SpendCycles(2);
                     D = true;
                     break;
                 case 0xF9: // SBC abs,Y
+                    Console.WriteLine("Executing instruction SBC (Subtract with Carry), Mode: Absolute, Index: Y...");
                     SBC(InstructionMode.Absolute, IndexRegister.Y);
                     break;
                 case 0xFD: // SBC abs,X
+                    Console.WriteLine("Executing instruction SBC (Subtract with Carry), Mode: Absolute, Index: X...");
                     SBC(InstructionMode.Absolute, IndexRegister.X);
                     break;
                 case 0xFE: // INC abs,X
+                    Console.WriteLine("Executing instruction INC (Increment Memory by One), Mode: Absolute, Index: X...");
                     INC(InstructionMode.Absolute, IndexRegister.X);
                     break;
                 default:
