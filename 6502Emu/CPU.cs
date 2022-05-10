@@ -21,9 +21,6 @@ namespace _6502Emu {
     internal static class CPU {
         internal static ulong CycleCount;
 
-        internal static void Initialize() {
-        }
-
         internal static void ExecuteInstruction(byte opcode) {
             #region Opcode functions
             // ADC - Add memory to accumulator with carry
@@ -2114,7 +2111,7 @@ namespace _6502Emu {
             S = 0xFF;
         }
 
-        internal static void TriggerInterrupt(bool maskable) {
+        internal static void Interrupt(bool maskable) {
             if (!I || !maskable) {
                 SpendCycles(8);
                 I = true;

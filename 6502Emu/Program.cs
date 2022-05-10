@@ -1,5 +1,4 @@
-﻿using _6502Emu;
-using static _6502Emu.Registers;
+﻿using static _6502Emu.Registers;
 using static _6502Emu.Memory;
 using static _6502Emu.CPU;
 
@@ -8,17 +7,18 @@ P = 0x36;
 WriteByte(0xFFFD, 0x08);
 Reset();
 PrintProcessorStatus();
+
 while (true) {
     ExecuteInstruction(ReadByte((ushort)(PC++ + ROMLocation)));
     PrintProcessorStatus();
 }
 
 void PrintProcessorStatus() {
-    Console.WriteLine("CycleCount: 0d" + CycleCount);
+    Console.WriteLine("CycleCount: " + CycleCount);
     Console.WriteLine("Registers:");
-    Console.WriteLine($"A: 0d{A}");
-    Console.WriteLine($"X: 0d{X}");
-    Console.WriteLine($"Y: 0d{Y}");
+    Console.WriteLine($"A: 0x{Convert.ToString(A, toBase: 16)}");
+    Console.WriteLine($"X: 0x{Convert.ToString(X, toBase: 16)}");
+    Console.WriteLine($"Y: 0x{Convert.ToString(Y, toBase: 16)}");
     Console.WriteLine($"S: 0x{Convert.ToString(S, toBase: 16)}");
     Console.WriteLine($"PC: 0x{Convert.ToString(PC, toBase: 16)}");
     Console.WriteLine($"P: 0x{Convert.ToString(P, toBase: 16)}");
