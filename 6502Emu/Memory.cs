@@ -10,8 +10,10 @@ namespace _6502Emu {
         internal const ushort StackLocation = 0x0100;
         internal const ushort IOLocation = 0x4000;
         internal const ushort ROMLocation = 0x8000;
+        internal const ushort InterruptLocation = 0xFFFA;
         internal static byte[] RAM = new byte[4096];
         internal static byte[] ROM = new byte[4096];
+        internal static byte[] Interrupt = new byte[6];
 
         internal static void LoadROMFile(string path) {
             FileStream fileStream = File.OpenRead(path);
@@ -35,6 +37,10 @@ namespace _6502Emu {
             if (address >= ROMLocation && address <= ROMLocation + ROM.Length) {
                 return ROM[address - ROMLocation];
             }
+            if (address >= InterruptLocation && address <= InterruptLocation + Interrupt.Length) {
+                return Interrupt[address - InterruptLocation];
+            }
+
             throw new SystemException($"Address undefined in memory address space: {address}");
         }
 

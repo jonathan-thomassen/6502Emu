@@ -2103,6 +2103,31 @@ namespace _6502Emu {
             #endregion
         }
 
+        internal static void Reset() {
+            Console.WriteLine("Resetting the CPU...");
+            SpendCycles(7);
+            PC = (ushort)((ReadByte(0xFFFD) << 8) | ReadByte(0xFFFC));
+            A = 0;
+            X = 0;
+            Y = 0;
+            P = 0x36;
+            S = 0xFF;
+        }
+
+        internal static void TriggerInterrupt(bool maskable) {
+            if (!I || !maskable) {
+                SpendCycles(8);
+                I = true;
+                WriteByte((ushort)(S-- + StackLocation), (byte)(PC >> 8));
+                WriteByte((ushort)(S-- + StackLocation), (byte)PC);
+                WriteByte((ushort)(S-- + StackLocation), P);
+                PC = maskable
+                    ? (ushort)((ReadByte(0xFFFF) << 8) | ReadByte(0xFFFE))
+                    : (ushort)((ReadByte(0xFFFB) << 8) | ReadByte(0xFFFA));
+                PC++;
+            }
+        }
+
         internal static void SpendCycles(int cycles) {
             for (int i = 0; i < cycles; i++) {
                 Console.WriteLine("Press any key to spend a cycle:");
