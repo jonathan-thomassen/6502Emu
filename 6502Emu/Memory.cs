@@ -5,7 +5,14 @@
         internal const ushort IOLocation = 0x4000;
         internal const ushort ROMLocation = 0x8000;
         internal const ushort ROMOffset = 0x800;
-        internal const ushort InterruptLocation = 0xFFFA;
+
+        internal const ushort NMIVectorLow = 0xFFFA;
+        internal const ushort NMIVectorHigh = 0xFFFB;
+        internal const ushort RESVectorLow = 0xFFFC;
+        internal const ushort RESVectorHigh = 0xFFFD;
+        internal const ushort IRQVectorLow = 0xFFFE;
+        internal const ushort IRQVectorHigh = 0xFFFF;
+
         internal static byte[] Map = new byte[0x10000];
 
         internal static void LoadROMFile(string path) {

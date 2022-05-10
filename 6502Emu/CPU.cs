@@ -2103,12 +2103,14 @@ namespace _6502Emu {
         internal static void Reset() {
             Console.WriteLine("Resetting the CPU...");
             SpendCycles(7);
-            PC = (ushort)((ReadByte(0xFFFD) << 8) | ReadByte(0xFFFC));
+            PC = (ushort)((ReadByte(RESVectorHigh) << 8) | ReadByte(RESVectorLow));
             A = 0;
             X = 0;
             Y = 0;
             P = 0x36;
             S = 0xFF;
+
+            MainCPULoop();
         }
 
         internal static void Interrupt(bool maskable) {
@@ -2132,6 +2134,33 @@ namespace _6502Emu {
                 CycleCount++;
                 Console.WriteLine("");
             }
+        }
+
+        internal static void MainCPULoop() {
+            PrintCPUStatus();
+            for (; ; ) {
+                ExecuteInstruction(ReadByte((ushort)(PC++ + ROMLocation)));
+                PrintCPUStatus();
+            }
+        }
+
+        internal static void PrintCPUStatus() {
+            Console.WriteLine("CycleCount: " + CycleCount);
+            Console.WriteLine("Registers:");
+            Console.WriteLine($"A: 0x{Convert.ToString(A, toBase: 16)}");
+            Console.WriteLine($"X: 0x{Convert.ToString(X, toBase: 16)}");
+            Console.WriteLine($"Y: 0x{Convert.ToString(Y, toBase: 16)}");
+            Console.WriteLine($"S: 0x{Convert.ToString(S, toBase: 16)}");
+            Console.WriteLine($"PC: 0x{Convert.ToString(PC, toBase: 16)}");
+            Console.WriteLine($"P: 0x{Convert.ToString(P, toBase: 16)}");
+            Console.WriteLine("Status flags:");
+            Console.WriteLine($"C: {(C ? "1" : "0")}");
+            Console.WriteLine($"Z: {(Z ? "1" : "0")}");
+            Console.WriteLine($"I: {(I ? "1" : "0")}");
+            Console.WriteLine($"D: {(D ? "1" : "0")}");
+            Console.WriteLine($"B: {(B ? "1" : "0")}");
+            Console.WriteLine($"V: {(V ? "1" : "0")}");
+            Console.WriteLine($"N: {(N ? "1" : "0")}");
         }
     }
 }
