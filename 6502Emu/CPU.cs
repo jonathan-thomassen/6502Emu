@@ -20,6 +20,8 @@ namespace _6502Emu {
 
     internal static class CPU {
         internal static ulong CycleCount;
+        internal static bool IRQ = false;
+        internal static bool NMI = false;
 
         internal static void ExecuteInstruction(byte opcode) {
             #region Opcode functions
@@ -1461,7 +1463,7 @@ namespace _6502Emu {
                 sbyte signedOffset;
 
                 if (offset < 128) {
-                    signedOffset = (sbyte)(offset);
+                    signedOffset = (sbyte)offset;
                 } else {
                     signedOffset = (sbyte)(offset - 256);
                 }
@@ -2121,8 +2123,8 @@ namespace _6502Emu {
                 WriteByte((ushort)(S-- + StackLocation), (byte)PC);
                 WriteByte((ushort)(S-- + StackLocation), P);
                 PC = maskable
-                    ? (ushort)((ReadByte(0xFFFF) << 8) | ReadByte(0xFFFE))
-                    : (ushort)((ReadByte(0xFFFB) << 8) | ReadByte(0xFFFA));
+                    ? (ushort)((ReadByte(IRQVectorHigh) << 8) | ReadByte(IRQVectorLow))
+                    : (ushort)((ReadByte(NMIVectorHigh) << 8) | ReadByte(NMIVectorLow));
                 PC++;
             }
         }
@@ -2139,6 +2141,12 @@ namespace _6502Emu {
         internal static void MainCPULoop() {
             PrintCPUStatus();
             for (; ; ) {
+                if (NMI) {
+                    Interrupt(false);
+                }
+                if (IRQ) {
+                    Interrupt(true);
+                }
                 ExecuteInstruction(ReadByte((ushort)(PC++ + ROMLocation)));
                 PrintCPUStatus();
             }
