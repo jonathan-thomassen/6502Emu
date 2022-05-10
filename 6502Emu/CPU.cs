@@ -2131,7 +2131,7 @@ namespace _6502Emu {
         internal static void SpendCycles(int cycles) {
             for (int i = 0; i < cycles; i++) {
                 Console.WriteLine("Press any key to spend a cycle:");
-                //Console.ReadKey();
+                Console.ReadKey();
                 CycleCount++;
                 Console.WriteLine("");
             }

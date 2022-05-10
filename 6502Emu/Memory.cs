@@ -11,44 +11,24 @@ namespace _6502Emu {
         internal const ushort IOLocation = 0x4000;
         internal const ushort ROMLocation = 0x8000;
         internal const ushort InterruptLocation = 0xFFFA;
-        internal static byte[] RAM = new byte[4096];
-        internal static byte[] ROM = new byte[4096];
-        internal static byte[] Interrupt = new byte[6];
+        internal static byte[] Map = new byte[0x10000];
 
         internal static void LoadROMFile(string path) {
             FileStream fileStream = File.OpenRead(path);
-            byte[] empty = new byte[0x800];
             byte[] romFile = new byte[4096];
 
             fileStream.Read(romFile);
             fileStream.Close();
 
-            byte[] finalRom = new byte[empty.Length + romFile.Length];
-            empty.CopyTo(finalRom, 0);
-            romFile.CopyTo(finalRom, empty.Length);
-
-            ROM = finalRom;
+            romFile.CopyTo(Map, 0x8800);
         }
 
         internal static byte ReadByte(ushort address) {
-            if (address >= RAMLocation && address <= RAMLocation + RAM.Length) {
-                return RAM[address - RAMLocation];
-            }
-            if (address >= ROMLocation && address <= ROMLocation + ROM.Length) {
-                return ROM[address - ROMLocation];
-            }
-            if (address >= InterruptLocation && address <= InterruptLocation + Interrupt.Length) {
-                return Interrupt[address - InterruptLocation];
-            }
-
-            throw new SystemException($"Address undefined in memory address space: {address}");
+            return Map[address];
         }
 
         internal static void WriteByte(ushort address, byte value) {
-            if (address > RAM.Length) {
-                throw new SystemException($"Address outside of memory: {address} / {RAM.Length}");
-            }
-            RAM[address] = value;
+            Map[address] = value;
         }
     }
 }

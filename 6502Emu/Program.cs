@@ -5,7 +5,7 @@ using static _6502Emu.CPU;
 
 LoadROMFile(@"C:\Users\jonat\Desktop\o6502-2022-05-08-194137.bin");
 P = 0x36;
-Interrupt[3] = 0x08;
+WriteByte(0xFFFD, 0x08);
 Reset();
 PrintProcessorStatus();
 while (true) {
